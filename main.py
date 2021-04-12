@@ -26,7 +26,7 @@ class Users(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     registrant_name = db.Column(db.String(200), nullable=False)
     registrant_email = db.Column(db.String(200), nullable=False, unique=True)
-    registrant_password = db.Column(db.String(200), nullable=False)
+    registrant_password = db.Column(db.String(1000), nullable=False)
 
     posts = relationship("Posts", back_populates="author")
     comments = relationship("Comments", back_populates="comment_author")
@@ -103,7 +103,6 @@ def register():
             flash("Password does not match. Try again.")
             return redirect(url_for("register"))
         else:
-            password = password.decode("utf-8", "ignore")
             new_user = Users(
                 registrant_name=name,
                 registrant_email=email,
