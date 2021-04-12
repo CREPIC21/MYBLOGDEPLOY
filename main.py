@@ -24,9 +24,9 @@ login_manager.init_app(app)
 class Users(UserMixin, db.Model):
     __tablename__ = "users"
     id = db.Column(db.Integer, primary_key=True)
-    registrant_name = db.Column(db.String(50), nullable=False)
-    registrant_email = db.Column(db.String(50), nullable=False, unique=True)
-    registrant_password = db.Column(db.String(50), nullable=False)
+    registrant_name = db.Column(db.String(200), nullable=False)
+    registrant_email = db.Column(db.String(200), nullable=False, unique=True)
+    registrant_password = db.Column(db.String(200), nullable=False)
 
     posts = relationship("Posts", back_populates="author")
     comments = relationship("Comments", back_populates="comment_author")
@@ -37,7 +37,7 @@ class Posts(db.Model):
     __tablename__ = "posted_blogs"
     id = db.Column(db.Integer, primary_key=True)
     post_title = db.Column(db.String(250), nullable=False)
-    post_body = db.Column(db.String(500), nullable=False)
+    post_body = db.Column(db.String(5000), nullable=False)
     date = db.Column(db.String(250), nullable=False)
 
     author_id = db.Column(db.Integer, db.ForeignKey("users.id"))
@@ -60,8 +60,8 @@ class Comments(db.Model):
 class Contacts(db.Model):
     __tablename__ = "email_inquiries"
     id = db.Column(db.Integer, primary_key=True)
-    email = db.Column(db.String(50), nullable=False)
-    email_body = db.Column(db.String(500), nullable=False)
+    email = db.Column(db.String(200), nullable=False)
+    email_body = db.Column(db.String(5000), nullable=False)
 
 
 db.create_all()
