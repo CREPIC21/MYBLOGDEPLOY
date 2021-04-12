@@ -103,6 +103,7 @@ def register():
             flash("Password does not match. Try again.")
             return redirect(url_for("register"))
         else:
+            password = password.decode("utf-8", "ignore")
             new_user = Users(
                 registrant_name=name,
                 registrant_email=email,
