@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./static/styles.css">
+</head>
+<body>
+    <div class="page-content">
+        <div class="header-navbar">
+            <div class="navbar-container">
+                <p>My Blog Post</p>
+            <ul class="table-navbar">
+                <li><a href="{{ url_for('home')}}">Home</a></li>
+                {% if not current_user.is_authenticated %}
+                <li><a href="{{ url_for('login')}}">Login</a></li>
+                <li><a href="{{ url_for('register')}}">Register</a></li>
+                {% endif %}
+                {% if current_user.id != 1 %}
+                <li><a href="{{ url_for('contact')}}">Contact</a></li>
+                {% endif %}
+                {% if current_user.is_authenticated %}
+                <li><a href="{{ url_for('logout')}}">Logout</a></li>
+                {% endif %}
+            </ul>
+            </div>
+        </div>
+
+        {% block content %}
+
+        {% if not current_user.is_authenticated %}
+        <div class="container container-form">
+        <div class="form-container home-content home-margin-bottom">
+            <p> Welcome to My Blog Post</p>
+            <a href="{{ url_for('login')}}">Log In</a>
+            <h4>or</h4>
+            <a href="{{ url_for('register')}}">Register</a>
+        </div>
+        </div>
+
+        {% else %}
+        <div class="container container-post">
+        <div class="posts-container">
+
+            {% for post in posts %}
+
+            <h1 class="post-title"><a href="{{ url_for('show_post', post_id=post.id)}}">{{ post.post_title }}</a></h1>
+            <p class="post-body">
+                {{ post.post_body[:120]|safe }}...
+            </p>
+            <p class="edit-delete-buttons"><p class="post-date-author">Created on {{post.date }} by {{ post.author.registrant_name }}</p>
+                {% if current_user.id == 1 %}
+                <a href="{{ url_for('delete', post_id=post.id) }}" class="post-delete-btn">X</a>
+                <a href="{{ url_for('edit', post_id=post.id) }}" class="edit-post-btn">Edit Post</a>
+                {% endif %}
+            </p>
+            {% endfor %}
+            {% if current_user.id == 1 %}
+            <a href="{{ url_for('post') }}" class="create-post-btn">Create New Post</a>
+            {% endif %}
+        </div>
+        </div>
+        {% endif %}
+
+    {% endblock %}
+
+        <footer class="footer-style">
+        <p>Copyright &copy; Danijel Crepic</p>
+        </footer>
+    </div>
+</body>
+</html>

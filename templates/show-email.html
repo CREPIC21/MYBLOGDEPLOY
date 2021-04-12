@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="posts-container">
+    <p class="email-content email-content-reply">
+        <span>Message Content : </span><br>{{ email.email_body}}
+    </p>
+    <form method="post" class="post-form">
+        <label for="email_reply">Message</label>
+        <textarea id="email_reply" name="email_reply"></textarea>
+        <button type="submit">SEND REPLY</button>
+    </form>
+</div>
+
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="posts-container">
+
+    {% for email in emails %}
+    <p class="email-content">
+        <a href="{{ url_for('show_email', email_id=email.id) }}">
+        {{ email.email_body|safe}}
+        </a>
+    </p>
+    <p class="email-sender">
+        Send by : {{ email.email }}
+    </p>
+    {% endfor %}
+
+</div>
+{% endblock %}

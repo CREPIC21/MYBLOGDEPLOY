@@ -1,0 +1,541 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap');
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    /* Set margin to 0 so there is no white spacing around div elements */
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+a, button {
+    cursor: pointer;
+}
+
+ul {
+    list-style-type: none
+}
+
+span {
+    display: block;
+    color: #686d76;
+}
+
+.page-content {
+    position: relative;
+    width: 100vw;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+.page-content::before {
+    content: "";
+    background-image: url("./flower.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    opacity: 0.4;
+}
+
+.posts-container h1, .posts-container h1 a {
+    color: #28a691;
+    font-weight: bold;
+}
+
+.posts-container h1 {
+    text-transform: uppercase;
+}
+
+.container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(232, 235, 238, 0);
+    color: black;
+    font-weight: bold;
+    font-size: medium;
+    text-align: center;
+}
+
+.container.container-post {
+    height: 100%;
+}
+
+.container-form {
+    background-color: rgba(232, 235, 238, 0);
+}
+
+/* Header CSS */
+.header-navbar {
+    position: fixed;
+    background-color: rgba(232, 235, 238, 0.9);
+    top: 0;
+    width: 100%;
+    z-index: 5;
+}
+
+.header-navbar .navbar-container {
+    display: flex;
+    justify-content:space-around;
+    align-items: center;
+    text-transform: uppercase;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #686d76;
+    margin: 0 auto;
+}
+
+.header-navbar p {
+    letter-spacing: 0.3cm;
+}
+
+.table-navbar {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    list-style: none;
+    padding-left: 0;
+}
+
+.table-navbar li {
+    margin: auto auto;
+}
+
+.table-navbar li a {
+    display: inline-block;
+    padding-right: 1.5rem;
+    margin: auto 0;
+    font-size: 1rem;
+    letter-spacing: 0.1cm;
+    color: #686d76;
+}
+
+.table-navbar li a:hover {
+    color: #32e0c4;
+}
+
+.table-navbar li:last-child a {
+    padding-right: 0;
+}
+
+/* Forms CSS */
+.form-container.home-content a {
+    color: #fff;
+    background-color: #28a691;
+    padding: 0.5rem 1rem;
+    width: 20%;
+    text-align: center;
+}
+
+.form-container.home-content a:hover {
+    outline: none;
+    background-color: #32e0c4;
+    border: 0.1px solid  #28a691;
+}
+
+.form-container {
+    background-color: rgba(232, 235, 238, 0.7);
+    width: 40%;
+    height: auto;
+    padding-top: 15px;
+    padding-bottom: 30px;
+    border-radius: 10px;
+}
+
+.form-container form, .form-container.home-content, .comment-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-container form p, .form-container.home-content p {
+    color: #32e0c4;
+    font-size: 2rem;
+    font-weight: 1000;
+    margin: 20px auto;
+    text-align: center;
+}
+
+.form-container.home-content h4 {
+    color: #32e0c4;
+    margin: 15px 0;
+}
+
+.form-container form label {
+    color: grey;
+    font-weight: 1000;
+    padding-bottom: 10px;
+}
+
+.form-container form button, .post-form button, .comment-form button {
+    background-color: #28a691;
+    color: #fff;
+    margin-top: 10px;
+}
+
+.form-container form input, .form-container form button, .form-container form textarea,
+ .post-form input, .post-form button, .post-form textarea, .comment-form button {
+    border: 2px solid rgba(232, 235, 238, 1);
+    margin-bottom: 10px;
+    width: 50%;
+    height: 30px;
+}
+
+.form-container form textarea, .post-form textarea {
+    resize: vertical;
+}
+
+.form-container form input:focus, .form-container form textarea:focus, .post-form input:focus, .post-form textarea:focus,
+ .comment-form textarea:focus {
+    outline: none;
+    border: 2px solid  #32e0c4;
+}
+
+.form-container form button:hover, .post-form button:hover, .comment-form button:hover {
+    outline: none;
+    background-color: #32e0c4;
+    border: 2px solid  #28a691;
+}
+
+/* Footer CSS */
+.footer-style {
+    position: fixed;
+    bottom: 0;
+    background-color: rgba(232, 235, 238, 0.9);
+    width: 100%;
+    text-align:center;
+    margin: 0 auto;
+}
+
+.footer-style p {
+    padding: 15px 0;
+    margin: 0 auto;
+    color: #686d76
+}
+
+/* Flash/Warning Messages CSS */
+ul.flashes {
+    padding: 0;
+    text-align: center;
+}
+
+.error {
+    color: red;
+    text-align: center;
+    font-size: 20px;
+    font-weight: 1000;
+    width: 90%;
+    margin: 0 auto;
+}
+
+/* Posts CSS */
+.posts-container {
+    position: relative;
+    width: 50%;
+    margin: 100px auto 100px auto;
+}
+
+.post-title {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    text-align: left;
+}
+
+.post-body {
+    text-align: left;
+}
+
+.post-date-author {
+    font-family: 'Indie Flower', cursive;
+    text-align: right;
+    color: #686d76;
+    font-weight: bold;
+    padding-right: 40px;
+}
+
+.post-delete-btn, .edit-post-btn, .create-post-btn {
+    display: inline-block;
+    color: #fff;
+    background-color: rgba(236, 1, 1, 0.8);
+    padding: 1px 8px;
+    margin: 0 3px 15px 3px;
+    border-radius: 5px;
+}
+
+.post-delete-btn:hover, .edit-post-btn:hover {
+    background-color: #bd1a1a;
+}
+
+.create-post-btn:hover, .email-content:hover {
+    background-color: #28a691;
+}
+
+.create-post-btn {
+    display: inline-block;
+    background-color: #32e0c4;
+    margin: 15px 0 0 0;
+    padding: 10px 15px;
+}
+
+.post-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.post-form input, .post-form textarea {
+    width: 80%;
+}
+
+.post-form label {
+    padding: 5px 0;
+}
+
+.post-form button, .comment-form button {
+    width: 15%;
+}
+
+.post-form textarea {
+    height: 100px;
+}
+
+.post-content {
+    text-align: left;
+}
+
+/* Comments CSS */
+.posted-comments-title {
+    text-align: left;
+    font-family: 'Indie Flower', cursive;
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+}
+
+.comment-form textarea {
+    width: 50%;
+    height: 40px;
+    border: 2px solid rgba(232, 235, 238, 1);
+    margin-bottom: 5px;
+    margin-top: 15px;
+    border-radius: 5px;
+    resize: horizontal;
+}
+
+.comment-text, .email-content {
+    text-align: left;
+    background-color: rgba(50, 224, 196, 0.6);
+    color: #fff;
+    font-size: 0.8rem;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+
+.comment-text {
+    background-color: #28a691;
+}
+
+.comment-author, .email-sender {
+    text-align: right;
+    padding-right: 2rem;
+    font-family: 'Indie Flower', cursive;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+/* Show Email Messages CSS */
+.email-content a {
+    display: block;
+    color: #fff;
+    font-weight: 1000;
+}
+
+.email-sender {
+    font-weight: 1000;
+}
+
+.email-content-reply {
+    width: 80%;
+    margin: 5px auto;
+}
+
+.email-content.email-content-reply:hover {
+    background-color: rgba(50, 224, 196, 0.6);
+}
+
+
+
+@media (max-width: 1100px) {
+    .form-container {
+        width: 70%;
+    }
+
+    .post-form button, .comment-form button {
+        width: 40%;
+    }
+
+    .posts-container {
+        width: 75%;
+    }
+}
+
+@media (max-width: 600px) {
+    .form-container {
+        width: 90%;
+    }
+}
+
+@media (max-width: 780px) {
+    .header-navbar p {
+        letter-spacing: 0.15cm;
+    }
+}
+
+@media (min-width: 270px) and (max-width: 600px) {
+    .comment-form textarea {
+        width: 100%;
+    }
+
+    .form-container form input, .form-container form button, .form-container form textarea {
+        width: 80%;
+    }
+
+    .form-container form p, .form-container.home-content p {
+        font-size: 1.5rem;
+    }
+
+    .form-container.home-content a {
+        width: 40%;
+    }
+
+    .header-navbar p {
+       display: none;
+    }
+
+    .table-navbar li a {
+        padding-right: 0.8rem;
+        font-size:0.8rem;
+    }
+
+    .posts-container {
+        width: 70%;
+    }
+
+    .post-date-author {
+        padding-right: 0;
+    }
+
+    .comment-form button {
+        height: 40px;
+    }
+
+    .post-delete-btn, .edit-post-btn, .create-post-btn {
+        font-size: 0.8rem;
+    }
+
+    .footer-style p {
+        font-size:0.8rem;
+    }
+}
+
+/* Galaxy Fold */
+@media (max-width: 285px) {
+    .table-navbar li a {
+        font-size: 0.6rem;
+        padding-right: 10px;
+    }
+
+    .header-navbar .navbar-container {
+        font-size: 1rem;
+    }
+
+    .comment-form button {
+        width: 55%;
+        height: 40px;
+    }
+
+    .form-container.home-content p {
+       font-size: 1.2rem;
+       padding: 0 5px;
+    }
+
+    .form-container.home-content a {
+        font-size: 0.8rem;
+    }
+}
+
+/* iPhone5 */
+@media (min-width: 285px) and (max-width: 325px) {
+    .table-navbar li a, .footer-style p {
+        font-size: 0.68rem;
+    }
+
+    .header-navbar .navbar-container {
+        font-size: 1rem;
+    }
+
+    .posts-container h1:first-child {
+        margin-top: 0px;
+    }
+
+    .post-date-author {
+        text-align: center;
+        padding: 0;
+        font-size: 0.8rem;
+    }
+
+    .post-title {
+        font-size: 1.8rem;
+    }
+
+    .post-body {
+        font-size: 0.9rem;
+    }
+
+    .comment-form textarea {
+        width: 100%;
+    }
+
+    .form-container form input, .form-container form button, .form-container form textarea {
+        width: 80%;
+    }
+
+    .form-container form p {
+        font-size: 1.5rem;
+    }
+
+    .form-container {
+        margin-top: 10px;
+        padding-top: 0;
+        padding-bottom: 10px;
+    }
+
+    .form-container.home-content p {
+       font-size: 1.2rem;
+    }
+
+    .form-container.home-content a {
+        font-size: 0.8rem;
+    }
+}

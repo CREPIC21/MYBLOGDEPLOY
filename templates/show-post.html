@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container container-post">
+    <div class="posts-container">
+        <h1>{{ post.post_title }}</h1>
+        <p class="post-content">
+            {{ post.post_body|safe }}
+        </p>
+        <p class="posted-comments-title">Posted Comments :</p>
+        {% for comment in comments %}
+        <p class="comment-text">
+            {{ comment.comment_body }}
+        </p>
+        <p class="comment-author">
+            Commented by : {{ comment.comment_author.registrant_name }}
+        </p>
+        {% if current_user.id == 1 %}
+        <a href="{{ url_for('delete', comment_id=comment.id) }}" class="post-delete-btn">Delete Comment</a>
+        {% endif %}
+        {% endfor %}
+        {% if current_user.id != 1 %}
+        <form method="post" class="comment-form">
+            <textarea id="comment" name="comment" required></textarea>
+            <button type="submit">ADD COMMENT</button>
+        </form>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}
