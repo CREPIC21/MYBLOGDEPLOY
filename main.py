@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, url_for, redirect, flash
+from flask import Flask, render_template, request, url_for, redirect, flash, send_from_directory
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import relationship
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -245,6 +245,12 @@ def show_email():
             db.session.commit()
             return redirect(url_for("see_emails", current_user=current_user))
     return render_template("show-email.html", email=email)
+
+@app.route('/download', methods=["GET", "POST"])
+@login_required
+def download():
+    file_name = request.args.get("file_title").lower()
+    return send_from_directory('static', filename=f'files/{file_name}_cheatsheet.pdf')
 
 
 @app.route('/logout')
