@@ -366,6 +366,21 @@ ul.flashes {
     margin-bottom: 0;
 }
 
+.comment-author {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.comment-avatar {
+    display: inline-block;
+    width:30px;
+    margin-right:10px;
+    height:100%;
+    float:left;
+    border-radius: 50%;
+}
+
 /* Show Email Messages CSS */
 .email-content a {
     display: block;

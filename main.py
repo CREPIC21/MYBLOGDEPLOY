@@ -5,6 +5,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import LoginManager, UserMixin, login_required, login_user, logout_user, current_user
 from functools import wraps
 from flask import abort
+from flask_gravatar import Gravatar
 from datetime import date
 import smtplib
 import os
@@ -18,6 +19,8 @@ db = SQLAlchemy(app)
 
 login_manager = LoginManager()
 login_manager.init_app(app)
+
+gravatar = Gravatar(app, size=100, rating='g', default='retro', force_default=False, force_lower=False, use_ssl=False, base_url=None)
 
 class Users(UserMixin, db.Model):
     __tablename__ = "users"
