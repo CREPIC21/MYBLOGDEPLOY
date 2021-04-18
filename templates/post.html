@@ -9,7 +9,7 @@
         <label for="title">Title</label>
         <input type="text" name="title" id="title" required>
         <label for="post_body">Your Post Description</label>
-        <textarea name="post_body" id="post_body"></textarea>
+        <textarea name="post_body" id="post_body" required></textarea>
         <button type="submit">ADD POST</button>
     </form>
 </div>
@@ -20,7 +20,7 @@
         <label for="change_title">Title</label>
         <input type="text" name="change_title" id="change_title" value="{{ post.post_title }}" required>
         <label for="change_post_body">Your Post Description</label>
-        <textarea name="change_post_body" id="change_post_body">{{ post.post_body|safe}}</textarea>
+        <textarea name="change_post_body" id="change_post_body" required>{{ post.post_body|safe}}</textarea>
         <button type="submit">EDIT POST</button>
     </form>
 </div>
