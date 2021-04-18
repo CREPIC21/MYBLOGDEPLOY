@@ -10,18 +10,23 @@ from datetime import date
 import smtplib
 import os
 
+# creating an app
 app = Flask(__name__)
 # Need to have a secret key for displaying flash messages and functionality of Login Manager
 app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY")
+# using database
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DATABASE_URL1", "sqlite:///registeredUsers.db")
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
+# initializing logon manager
 login_manager = LoginManager()
 login_manager.init_app(app)
 
+# for creating avatars next to comment author name
 gravatar = Gravatar(app, size=100, rating='g', default='retro', force_default=False, force_lower=False, use_ssl=False, base_url=None)
 
+# users database
 class Users(UserMixin, db.Model):
     __tablename__ = "users"
     id = db.Column(db.Integer, primary_key=True)
@@ -32,8 +37,7 @@ class Users(UserMixin, db.Model):
     posts = relationship("Posts", back_populates="author")
     comments = relationship("Comments", back_populates="comment_author")
 
-
-
+# posts database
 class Posts(db.Model):
     __tablename__ = "posted_blogs"
     id = db.Column(db.Integer, primary_key=True)
@@ -46,6 +50,7 @@ class Posts(db.Model):
 
     comments = relationship("Comments", back_populates="post")
 
+# comments database
 class Comments(db.Model):
     __tablename__ = "posted_comments"
     id = db.Column(db.Integer, primary_key=True)
@@ -58,6 +63,7 @@ class Comments(db.Model):
     post = relationship("Posts", back_populates="comments")
 
 
+# email recieved from users database
 class Contacts(db.Model):
     __tablename__ = "email_inquiries"
     id = db.Column(db.Integer, primary_key=True)
@@ -71,7 +77,7 @@ class Contacts(db.Model):
 def load_user(user_id):
     return Users.query.get(int(user_id))
 
-
+# admin access only decorator
 def admin_only_access(function):
     @wraps(function)
     def decorated_function(*args, **kwargs):
@@ -81,6 +87,7 @@ def admin_only_access(function):
     return decorated_function
 
 
+# once user or admin logs in they will see a list of posts
 @app.route('/')
 def home():
     all_posts = Posts.query.all()
@@ -89,6 +96,7 @@ def home():
     return render_template("base.html", posts=all_posts, current_user=current_user)
 
 
+# register page form
 @app.route('/register', methods=["GET", "POST"])
 def register():
     if request.method == "POST":
@@ -116,6 +124,7 @@ def register():
     return render_template("register.html")
 
 
+# login page form
 @app.route('/login', methods=["GET", "POST"])
 def login():
     if request.method == "POST":
@@ -136,6 +145,7 @@ def login():
 
     return render_template("login.html")
 
+# contact page form
 @app.route('/contact', methods=["GET", "POST"])
 def contact():
     if request.method == "POST":
@@ -148,6 +158,7 @@ def contact():
         return redirect(url_for("home", current_user=current_user))
     return render_template("contact.html")
 
+# route only for admin to add new post or ediit existing post
 @app.route('/post', methods=["GET", "POST"])
 @login_required
 @admin_only_access
@@ -166,6 +177,7 @@ def post():
     return render_template("post.html", current_user=current_user, new_post=post_to_change)
 
 
+# route to see clicked post where user can leave a comment
 @app.route('/show-post', methods=["GET", "POST"])
 @login_required
 def show_post():
@@ -184,6 +196,7 @@ def show_post():
     return render_template("show-post.html", post=post_to_display, comments=comments_to_display, current_user=current_user)
 
 
+# route for admin where he can delete existing posts and comments
 @app.route('/delete')
 @login_required
 @admin_only_access
@@ -201,6 +214,7 @@ def delete():
     return redirect(url_for("home", current_user=current_user))
 
 
+# route for admin to edit existing post
 @app.route('/edit', methods=["GET", "POST"])
 @login_required
 @admin_only_access
@@ -215,6 +229,7 @@ def edit():
     return render_template("post.html", current_user=current_user, post=post_to_edit, new_post=post_to_change)
 
 
+# route for admin to see emails send by users via contact page
 @app.route('/email-messages')
 @login_required
 @admin_only_access
@@ -225,6 +240,7 @@ def see_emails():
     return render_template("emails.html", emails=all_emails, current_user=current_user)
 
 
+# route for admin to see email send by user and reply by sending email back
 @app.route('/show-email', methods=["GET", "POST"])
 @login_required
 @admin_only_access
@@ -246,13 +262,14 @@ def show_email():
             return redirect(url_for("see_emails", current_user=current_user))
     return render_template("show-email.html", email=email)
 
+# route for users to download pdf file for specific post
 @app.route('/download', methods=["GET", "POST"])
 @login_required
 def download():
     file_name = request.args.get("file_title").lower()
     return send_from_directory('static', filename=f'files/{file_name}_cheatsheet.pdf')
 
-
+# logout route
 @app.route('/logout')
 @login_required
 def logout():
