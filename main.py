@@ -19,7 +19,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DATABASE_URL1", "sqlite:
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
-# initializing logon manager
+# initializing login manager
 login_manager = LoginManager()
 login_manager.init_app(app)
 
@@ -73,6 +73,7 @@ class Contacts(db.Model):
 
 # db.create_all()
 
+# callback used to reload the user object from the user ID stored in the session
 @login_manager.user_loader
 def load_user(user_id):
     return Users.query.get(int(user_id))
