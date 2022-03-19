@@ -63,7 +63,7 @@ class Comments(db.Model):
     post = relationship("Posts", back_populates="comments")
 
 
-# email recieved from users database
+# email received from users database
 class Contacts(db.Model):
     __tablename__ = "email_inquiries"
     id = db.Column(db.Integer, primary_key=True)
@@ -230,7 +230,7 @@ def edit():
     return render_template("post.html", current_user=current_user, post=post_to_edit, new_post=post_to_change)
 
 
-# route for admin to see emails send by users via contact page
+# route for admin to see a list of all emails send by users via contact page
 @app.route('/email-messages')
 @login_required
 @admin_only_access
@@ -241,7 +241,7 @@ def see_emails():
     return render_template("emails.html", emails=all_emails, current_user=current_user)
 
 
-# route for admin to see email send by user and reply by sending email back
+# route for admin to see specific email send by user and reply by sending email back
 @app.route('/show-email', methods=["GET", "POST"])
 @login_required
 @admin_only_access
@@ -279,4 +279,4 @@ def logout():
 
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=5000)
+    app.run(host='127.0.0.1', port=5000)
