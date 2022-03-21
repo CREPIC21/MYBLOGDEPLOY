@@ -71,7 +71,7 @@ class Contacts(db.Model):
     email_body = db.Column(db.String(5000), nullable=False)
 
 
-# db.create_all()
+db.create_all()
 
 # callback used to reload the user object from the user ID stored in the session
 @login_manager.user_loader
