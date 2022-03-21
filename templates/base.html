@@ -6,13 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://kit.fontawesome.com/0d47fb2970.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="./static/styles.css">
-    <title>Dan's Blog Post</title>
+    <title>Dan's Portfolio</title>
 </head>
 <body>
     <div class="page-content">
         <div class="header-navbar">
             <div class="navbar-container">
-                <p>Dan's Blog Post</p>
+                <p>Dan's Portfolio</p>
             <ul class="table-navbar">
                 <li><a href="{{ url_for('home')}}">Home</a></li>
                 {% if not current_user.is_authenticated %}

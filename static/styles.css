@@ -433,6 +433,12 @@ ul.flashes {
     }
 }
 
+@media (max-width: 680px) {
+    .header-navbar p {
+       display: none;
+    }
+}
+
 @media (min-width: 270px) and (max-width: 600px) {
     .comment-form textarea {
         width: 100%;
@@ -448,10 +454,6 @@ ul.flashes {
 
     .form-container.home-content a {
         width: 40%;
-    }
-
-    .header-navbar p {
-       display: none;
     }
 
     .table-navbar li a {

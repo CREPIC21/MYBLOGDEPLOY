@@ -268,6 +268,10 @@ def show_email():
 @login_required
 def download():
     file_name = request.args.get("file_title").lower()
+    print(file_name)
+    if "project" in file_name:
+        file_name = file_name.replace(" ", "")
+        return send_from_directory('static', filename=f'files/{file_name}_code.pdf')
     return send_from_directory('static', filename=f'files/{file_name}_cheatsheet.pdf')
 
 # logout route
