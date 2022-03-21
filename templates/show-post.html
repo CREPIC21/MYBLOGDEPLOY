@@ -8,7 +8,7 @@
         <p class="post-content">
             {{ post.post_body|safe }}
         </p>
-        {% if post.id != 5 %}
+        {% if post.id != 1 %}
         <a href="{{ url_for('download', file_title=post.post_title) }}" target="_blank" class="email-content">
             Download Your {{ post.post_title }} Cheat Sheet <i class="fas fa-download"></i>
         </a>
