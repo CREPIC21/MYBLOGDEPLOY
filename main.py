@@ -256,7 +256,7 @@ def show_email():
             connection.sendmail(
                 from_addr=my_email,
                 to_addrs=email.email,
-                msg=f"Subject: Email Reply from Danijel's Blog Post\n\n{request.form['email_reply']}"
+                msg=f"Subject: Email Reply From Danijel's Blog Post\n\n{request.form['email_reply']}"
             )
             db.session.delete(email)
             db.session.commit()
