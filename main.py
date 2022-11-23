@@ -159,7 +159,7 @@ def contact():
         return redirect(url_for("home", current_user=current_user))
     return render_template("contact.html")
 
-# route only for admin to add new post or ediit existing post
+# route only for admin user to add new post or ediit existing post
 @app.route('/post', methods=["GET", "POST"])
 @login_required
 @admin_only_access
